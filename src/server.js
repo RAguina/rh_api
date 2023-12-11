@@ -11,8 +11,8 @@ import morgan from 'morgan';
 const app = express();
 
 app.use(morgan('dev'));
-//app.use(allowCrossDomain);
-app.use(cors(corsOptions))
+app.use(allowCrossDomain);
+//app.use(cors(corsOptions))
 app.use(express.json());  
 
 const __filename = fileURLToPath(import.meta.url);
