@@ -7,7 +7,8 @@ export const allowCrossDomain = (req, res, next) => {
 
 export const corsOptions = {
   //origin: '*',
-  origin: 'http://localhost:5173',
+  //origin: 'http://localhost:5173',
+  origin: 'https://raguina.github.io/rh_app/',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 };
