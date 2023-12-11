@@ -7,9 +7,6 @@ import inmueblesRoutes from './routes/inmuebles.js';
 import imagenesInmueblesRoutes from './routes/imagenes_inmuebles.routes.js';
 import usuariosRoutes from './routes/propietarios.js';
 import morgan from 'morgan';
-import dotenv from 'dotenv';
-dotenv.config();
-
 
 const app = express();
 
