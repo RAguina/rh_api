@@ -33,14 +33,16 @@ export const uploadImage = async (req, res) => {
   try {
     // Sube la imagen a Cloudinary
     const result = await cloudinary.uploader.upload(image.path);
-
+    console.log('secure_url:', result.secure_url);
+  console.log('public_id:', result.public_id);
+  console.log("Hola soy un breackpoint 1")
     // Crea un nuevo registro en la base de datos para la imagen
     const nuevaImagen = await ImagenInmueble.create({
       propiedad_id: req.body.propiedad_id, // Ajusta según tu modelo
       url: result.secure_url,
       public_id: result.public_id,
     });
-    console.log(nuevaImagen);
+    console.log("nueva imagen:", nuevaImagen);
 
     // Usa la constante file en tu lógica, por ejemplo:
     console.log("Información de la imagen procesada:", image);
