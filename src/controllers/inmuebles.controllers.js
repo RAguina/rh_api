@@ -85,7 +85,7 @@ export const createInmueble = async (req, res) => {
       { transaction: t }
     );
     
-    await ImagenInmueble.crea te(
+    await ImagenInmueble.create(
       { propiedad_id: inmueble.id_propiedad, url_imagen },
       { transaction: t }
     );
