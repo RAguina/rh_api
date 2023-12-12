@@ -39,6 +39,7 @@ export const uploadImage = async (req, res) => {
       url: result.secure_url,
       public_id: result.public_id,
     });
+    console.log(nuevaImagen);
 
     // Usa la constante file en tu lógica, por ejemplo:
     console.log("Información de la imagen procesada:", image);
