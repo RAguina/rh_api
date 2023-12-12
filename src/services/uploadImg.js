@@ -7,7 +7,7 @@ cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
-  secure: false,
+  secure: true,
 });
 
 
@@ -17,6 +17,7 @@ const storage = new CloudinaryStorage({
     folder: 'inmuebles_images',
     format: async (req, file) => 'png',
     public_id: (req, file) => {
+      console.log("dentro de multer",req.body);
       return Date.now()
      // return file.imagen_propiedad; // Ajusta según cómo hayas generado el nombre en el frontend
     },

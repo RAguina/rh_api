@@ -78,7 +78,8 @@ export const createInmueble = async (req, res) => {
 
     // Inicia una transacción
     const t = await sequelize.transaction();
-
+  console.log("Cuerpo de la Solicitud 23sdfskfskdfk:", req.body)
+  console.log("Cuerpo de la Solicitud que se te cante", req.body.propietario_id)
   try {
     const inmueble = await Inmueble.create(
       { nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id },
