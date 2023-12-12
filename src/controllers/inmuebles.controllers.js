@@ -3,6 +3,7 @@ import ImagenInmueble from '../models/imagenesInmueblesModel.js';
 import Usuario from '../models/userModel.js';
 
 
+
 // Controlador para obtener todos los inmuebles
 export const getInmuebles = async (req, res) => {
   try {
@@ -75,13 +76,27 @@ export const deleteInmueble = async (req, res) => {
 export const createInmueble = async (req, res) => {
   const { nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, url_imagen } = req.body;
 
+    // Inicia una transacción
+    const t = await sequelize.transaction();
+
   try {
-    const inmueble = await Inmueble.create({ nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id });
+    const inmueble = await Inmueble.create(
+      { nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id },
+      { transaction: t }
+    );
     
-    await ImagenInmueble.create({ propiedad_id: inmueble.id_propiedad, url_imagen });
+    await ImagenInmueble.crea te(
+      { propiedad_id: inmueble.id_propiedad, url_imagen },
+      { transaction: t }
+    );
+
+    // Confirma la transacción
+    await t.commit();
 
     res.send('Inmueble creado.');
   } catch (err) {
+      // Revierte la transacción en caso de error
+      await t.rollback();
     console.error(err);
     res.status(500).send('Error al crear el inmueble');
   }
