@@ -26,7 +26,8 @@ app.use('/imagen_inmuebles', imagenesInmueblesRoutes);
 app.use('/usuarios', usuariosRoutes);
 
 const port = process.env.PORT || 8080;
-
+console.log(process.env.DB_USER);
+console.log(process.env.DB_PASS);
 app.listen(port, () => {
   console.log(`Servidor corriendo en Puerto : ${port}`);
 });
