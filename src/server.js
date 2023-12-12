@@ -14,6 +14,7 @@ app.use(morgan('dev'));
 app.use(allowCrossDomain);
 //app.use(cors(corsOptions))
 app.use(express.json());  
+app.use(express.urlencoded({ extended: true }));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
