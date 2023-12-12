@@ -22,6 +22,7 @@ export const getImagenesInmueble = async (req, res) => {
 
 export const uploadImage = async (req, res) => {
   console.log("hola1");  // Asegúrate de que la imagen se está enviando en la solicitud
+  console.log("cuerpo del req:",req.body);
   if (!req.files || !req.files.image) {
     return res.status(400).json({ error: 'No se subió ninguna imagen.' });
   }
