@@ -17,8 +17,8 @@ const storage = new CloudinaryStorage({
     folder: 'inmuebles_images',
     format: async (req, file) => 'png',
     public_id: (req, file) => {
-
-      return file.imagen_propiedad; // Ajusta según cómo hayas generado el nombre en el frontend
+      return Date.now()
+     // return file.imagen_propiedad; // Ajusta según cómo hayas generado el nombre en el frontend
     },
   },
 });
