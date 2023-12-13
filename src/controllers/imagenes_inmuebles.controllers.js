@@ -19,7 +19,7 @@ export const getImagenesInmueble = async (req, res) => {
     res.status(500).send('Error al obtener las imágenes');
   }
 };
-
+//Funcion que se encarga de registrar imagen en la base de datos
 export const uploadImage = async (req, res) => {
   console.log("hola1");  // Asegúrate de que la imagen se está enviando en la solicitud
   console.log("cuerpo del req:",req.body);
@@ -33,9 +33,14 @@ export const uploadImage = async (req, res) => {
   try {
     // Sube la imagen a Cloudinary
     const result = await cloudinary.uploader.upload(image.path);
-    console.log('secure_url:', result.secure_url);
-  console.log('public_id:', result.public_id);
-  console.log("Hola soy un breackpoint 1")
+    result.then(()=>{
+
+      console.log('secure_url:', result.secure_url);
+      console.log('public_id:', result.public_id);
+      console.log("Hola soy un breackpoint 1")
+    })
+
+
     // Crea un nuevo registro en la base de datos para la imagen
     const nuevaImagen = await ImagenInmueble.create({
       propiedad_id: req.body.propiedad_id, // Ajusta según tu modelo
