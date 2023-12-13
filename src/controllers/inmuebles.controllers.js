@@ -71,7 +71,30 @@ export const deleteInmueble = async (req, res) => {
   }
 };
 
+export const createInmueble = async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
+    const { nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, url_imagen } = req.body;
+    
+    // Inserta el nuevo usuario en la base de datos
+    await Inmueble.create({ 
+      nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, url_imagen
+    });
+    res.send('Inmueble creado.');
+    await ImagenInmueble.create({
+      propiedad_id: inmueble.id_propiedad, url_imagen
+    })
+    res.send('Imagen Inmueble subida.');
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: err.message });
+  } 
+};
+/*
 // Controlador para crear un nuevo inmueble
 export const createInmueble = async (req, res) => {
   const { nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, url_imagen } = req.body;
@@ -102,3 +125,4 @@ export const createInmueble = async (req, res) => {
     res.status(500).send('Error al crear el inmueble');
   }
 };
+*/
