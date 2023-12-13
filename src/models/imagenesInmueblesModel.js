@@ -12,8 +12,10 @@ const ImagenInmueble = sequelize.define('imagen_inmueble', {
     type: DataTypes.STRING,
     allowNull: true
   },
-  propiedad_id: DataTypes.INTEGER,
-  allowNull: false
+  propiedad_id: {
+    type: DataTypes.INTEGER,
+    allowNull: true
+  }
 },{
   timestamps: true,
   createdAt: 'createdat',
