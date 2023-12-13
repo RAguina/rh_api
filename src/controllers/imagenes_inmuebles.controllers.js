@@ -19,7 +19,40 @@ export const getImagenesInmueble = async (req, res) => {
     res.status(500).send('Error al obtener las imágenes');
   }
 };
-//Funcion que se encarga de registrar imagen en la base de datos
+
+export const uploadImage = async (req, res) => {
+  console.log("hola1");
+  console.log("cuerpo del req:", req.body);
+
+  // Si el cuerpo de la solicitud no contiene la imagen, sube la imagen a Cloudinary
+  if (!req.body.image) {
+    const image = req.files.image;
+
+    // Sube la imagen a Cloudinary
+    const result = await cloudinary.uploader.upload(image.path);
+
+    // Espera a que la promesa se resuelva
+    result.then(() => {
+      // Obtén el nombre del archivo o la URL
+      const nombreImagen = result.secure_url; // O result.public_id
+
+      // Crea un nuevo registro en la base de datos para la imagen
+      const nuevaImagen = ImagenInmueble.create({
+        propiedad_id: req.body.propiedad_id,
+        nombre_imagen: nombreImagen,
+      });
+
+      // Devuelve el resultado de la subida
+      res.json(result);
+    });
+  } else {
+    // La imagen ya se ha subido, no es necesario subirla nuevamente
+    res.json({ success: true });
+  }
+};
+
+/*
+//(Version semi estable)Funcion que se encarga de registrar imagen en la base de datos
 export const uploadImage = async (req, res) => {
   console.log("hola1");  // Asegúrate de que la imagen se está enviando en la solicitud
   console.log("cuerpo del req:",req.body);
@@ -70,7 +103,7 @@ export const uploadImage = async (req, res) => {
     }
   }
 };
-
+*/
 
 
 /*
