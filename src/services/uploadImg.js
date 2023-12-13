@@ -18,8 +18,7 @@ const storage = new CloudinaryStorage({
     format: async (req, file) => 'png',
     public_id: (req, file) => {
       console.log("dentro de multer",file.originalname);
-      return Date.now()
-     // return file.ori; // Ajusta según cómo hayas generado el nombre en el frontend
+      return file.originalname; // Ajusta según cómo hayas generado el nombre en el frontend
     },
   },
 });
