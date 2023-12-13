@@ -17,6 +17,7 @@ router.put('/:id', updateInmueble);
 router.delete('/:id', deleteInmueble);
 
 // Ruta para crear un nuevo inmueble
-router.post('/', authenticateJWT, createInmueble);
+router.post('/', //authenticateJWT, 
+createInmueble);
 
 export default router;
