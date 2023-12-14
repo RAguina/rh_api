@@ -81,12 +81,13 @@ export const createInmueble = async (req, res) => {
     const { nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, url_imagen } = req.body;
     
     // Inserta el nuevo usuario en la base de datos
-    await Inmueble.create({ 
+    const nuevoInmueble = await Inmueble.create({ 
       nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, url_imagen
     });
     res.send('Inmueble creado.');
+    const propiedad_id = nuevoInmueble;
     await ImagenInmueble.create({
-      propiedad_id: inmueble.id_propiedad, url_imagen
+      propiedad_id, url_imagen
     })
     res.send('Imagen Inmueble subida.');
   } catch (err) {
