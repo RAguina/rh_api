@@ -37,7 +37,7 @@ export const uploadImage = async (req, res) => {
       // Crea un nuevo registro en la base de datos para la imagen
       const nuevaImagen = await ImagenInmueble.create({
         propiedad_id: req.body.propiedad_id,
-        nombre_imagen: nombreImagen,
+        nombre_imagen: result.secure_url,
       });
 
       console.log("nuevaImagen_propiuedad:",propiedad_id);
