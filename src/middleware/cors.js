@@ -10,7 +10,7 @@ export const corsOptions = {
   //origin: '*',
   //origin: 'http://localhost:5173',
   //origin: 'https://raguina.github.io/rh_app/',
-  origin: 'https://rh-pkqm6z5q6-rodrigos-projects-d06be1de.vercel.app',
+  origin: 'https://rh-app.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 };

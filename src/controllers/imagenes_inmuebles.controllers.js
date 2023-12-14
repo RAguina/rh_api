@@ -31,20 +31,20 @@ export const uploadImage = async (req, res) => {
     // Sube la imagen a Cloudinary
     const result = await cloudinary.uploader.upload(image.path);
 
-    // Espera a que la promesa se resuelva
-    result.then(() => {
       // Obtén el nombre del archivo o la URL
       const nombreImagen = result.secure_url; // O result.public_id
-
+      console.log("nombreImagen", nombreImagen);
       // Crea un nuevo registro en la base de datos para la imagen
-      const nuevaImagen = ImagenInmueble.create({
+      const nuevaImagen = await ImagenInmueble.create({
         propiedad_id: req.body.propiedad_id,
         nombre_imagen: nombreImagen,
       });
 
+      console.log("nuevaImagen_propiuedad:",propiedad_id);
+      console.log("nuevaImagen_nombreima",nombre_imagen);
       // Devuelve el resultado de la subida
       res.json(result);
-    });
+      return nuevaImagen
   } else {
     // La imagen ya se ha subido, no es necesario subirla nuevamente
     res.json({ success: true });
