@@ -20,22 +20,26 @@ export const getImagenesInmueble = async (req, res) => {
   }
 };
 
-console.log("hola1");
-console.log("cuerpo del archivo:", req.files.image);
-console.log("cuerpo del body:", req.body);
-console.log("cuerpo del header:", req.headers);
+//console.log("hola1");
+//console.log("cuerpo del archivo:", req.files.image);
+//console.log("cuerpo del body:", req.body);
+//console.log("cuerpo del header:", req.headers);
+
 export const uploadImage = async (req, res) => {
 
   // Si el cuerpo de la solicitud no contiene la imagen, sube la imagen a Cloudinary
-  if (!req.files.image) {
+  if (!req.files || !req.files.image) {
+    return res.status(400).json({ error: 'No se subió ninguna imagen.' });
+  } 
+  else {
     const image = req.files.image;
 
     // Sube la imagen a Cloudinary
     const result = await cloudinary.uploader.upload(image.path);
-  } else {
-    // La imagen ya se ha subido, no es necesario subirla nuevamente
     res.json({ success: true });
-  }}
+  } 
+}
+    // La imagen ya se ha subido, no es necesario subirla nuevamente
     /*
       // Obtén el nombre del archivo o la URL
       const nombreImagen = result.secure_url; // O result.public_id
