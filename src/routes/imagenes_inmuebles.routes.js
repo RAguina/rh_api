@@ -7,7 +7,7 @@ const router = express.Router();
 // Ruta para obtener todas las imágenes de un inmueble
 router.get('/:id', getImagenesInmueble);
 
-router.post('/upload', authenticateJWT, parser.single('image'), uploadImage);
+router.post('/upload', parser.single('image'), uploadImage);
 
 
 export default router;
