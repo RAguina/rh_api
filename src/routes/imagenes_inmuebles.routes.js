@@ -4,6 +4,10 @@ import { parser } from '../services/uploadImg.js'
 import { authenticateJWT } from '../middleware/jwt.js';
 const router = express.Router();
 
+
+// Configura CORS para la ruta de upload
+router.options('/upload', cors());
+
 // Ruta para obtener todas las imágenes de un inmueble
 router.get('/:id', getImagenesInmueble);
 

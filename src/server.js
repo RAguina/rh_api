@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors'
 import { allowCrossDomain, corsOptions } from './middleware/cors.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -12,7 +11,7 @@ const app = express();
 
 app.use(allowCrossDomain);
 app.use(morgan('dev'));
-//app.use(cors(corsOptions))
+
 app.use(express.json());  
 app.use(express.urlencoded({ extended: true }));
 
@@ -31,3 +30,8 @@ const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`Servidor corriendo en Puerto : ${port}`);
 });
+
+
+
+
+//app.use(cors(corsOptions))
