@@ -28,15 +28,16 @@ export const getImagenesInmueble = async (req, res) => {
 export const uploadImage = async (req, res) => {
 
   // Si el cuerpo de la solicitud no contiene la imagen, sube la imagen a Cloudinary
-  if (!req.files || !req.files.image) {
+  if (!req.file || !req.file.image) {
     return res.status(400).json({ error: 'No se subió ninguna imagen.' });
   } 
   else {
-    const image = req.files.image;
+    const image = req.file.image;
 
     // Sube la imagen a Cloudinary
     const result = await cloudinary.uploader.upload(image.path);
     res.json({ success: true });
+    return result
   } 
 }
     // La imagen ya se ha subido, no es necesario subirla nuevamente
