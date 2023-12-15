@@ -77,9 +77,10 @@ export const createInmueble = async (req, res) => {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
+    console.log("Hasta aca llega createInmueble paso1")
+    console.log("Hasta aca llega createInmueble pASO 1 req.body:",req.body)
     const { nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, url_imagen } = req.body;
-    
+    console.log("hasta aca llega(createInmueble paso2)");
     // Inserta el nuevo usuario en la base de datos
     const nuevoInmueble = await Inmueble.create({ 
       nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, url_imagen
@@ -89,9 +90,10 @@ export const createInmueble = async (req, res) => {
     await ImagenInmueble.create({
       propiedad_id, url_imagen
     })
-    res.send('Imagen Inmueble subida.');
+    res.send('Imagen Inmueble guardada en base de datos.');
   } catch (err) {
     console.error(err);
+    console.log("Error en createInmueble paso 3");
     res.status(500).json({ message: err.message });
   } 
 };

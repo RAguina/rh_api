@@ -20,9 +20,11 @@ export const getImagenesInmueble = async (req, res) => {
   }
 };
 
+console.log("hola1");
+console.log("cuerpo del archivo:", req.files.image);
+console.log("cuerpo del body:", req.body);
+console.log("cuerpo del header:", req.headers);
 export const uploadImage = async (req, res) => {
-  console.log("hola1");
-  console.log("cuerpo del req:", req.files.image);
 
   // Si el cuerpo de la solicitud no contiene la imagen, sube la imagen a Cloudinary
   if (!req.files.image) {
@@ -30,7 +32,10 @@ export const uploadImage = async (req, res) => {
 
     // Sube la imagen a Cloudinary
     const result = await cloudinary.uploader.upload(image.path);
-
+  } else {
+    // La imagen ya se ha subido, no es necesario subirla nuevamente
+    res.json({ success: true });
+  }}
     /*
       // Obtén el nombre del archivo o la URL
       const nombreImagen = result.secure_url; // O result.public_id
@@ -45,13 +50,10 @@ export const uploadImage = async (req, res) => {
       */
 
       // Devuelve el resultado de la subida
-      res.json(result);
+      //res.json(result);
      // return nuevaImagen
-  } else {
-    // La imagen ya se ha subido, no es necesario subirla nuevamente
-    res.json({ success: true });
-  }
-};
+
+
 
 /*
 //(Version semi estable)Funcion que se encarga de registrar imagen en la base de datos
