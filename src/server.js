@@ -1,5 +1,5 @@
 import express from 'express';
-import { allowCrossDomain, corsOptions } from './middleware/cors.js';
+import { allowCrossDomain } from './middleware/cors.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import inmueblesRoutes from './routes/inmuebles.js';
