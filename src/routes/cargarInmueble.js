@@ -19,7 +19,7 @@ router.put('/:id', updateInmueble);
 router.delete('/:id', deleteInmueble);
 
 // Ruta para obtener todos los inmuebles
-router.post('/', async (req,res) =>{
+router.post('/cargarInmuebles', async (req,res) =>{
   
   const { nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, url_imagen } = req.body;
 

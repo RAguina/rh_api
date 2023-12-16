@@ -25,7 +25,7 @@ app.use(express.static(publicDirectory));
 app.use('/inmuebles', inmueblesRoutes);
 app.use('/imagen_inmuebles', imagenesInmueblesRoutes);
 app.use('/usuarios', usuariosRoutes);
-app.use('/cargarInmuebles', usuariosRoutes);
+app.use('/cargarInmuebles', cargarInmuebles);
 
 const port = process.env.PORT || 8080;
 
