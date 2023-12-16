@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 // Configura CORS para la ruta de upload
-router.options('/upload', cors());
+//router.options('/upload', cors());
 
 // Ruta para obtener todas las imágenes de un inmueble
 router.get('/:id', getImagenesInmueble);
