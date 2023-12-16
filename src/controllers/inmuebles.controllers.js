@@ -1,8 +1,5 @@
 import Inmueble from '../models/inmuebleModel.js';
 import ImagenInmueble from '../models/imagenesInmueblesModel.js';
-import Usuario from '../models/userModel.js';
-
-
 
 // Controlador para obtener todos los inmuebles
 export const getInmuebles = async (req, res) => {
