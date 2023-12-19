@@ -39,7 +39,7 @@ export const uploadImage = async (req, res) => {
     // Sube la imagen a Cloudinary
     const result = await cloudinary.uploader.upload(image.path);
     res.json({ success: true, result });
-    return result
+    return req.file.path
   } 
 }
     // La imagen ya se ha subido, no es necesario subirla nuevamente
