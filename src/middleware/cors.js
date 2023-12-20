@@ -8,12 +8,15 @@ if (req.method === 'OPTIONS' && req.url === '/imagen_inmuebles/upload') {
   console.log('Middleware allowCrossDomain ejecutado 2');
   return;
 }
+//console.log('Middleware allowCrossDomain ejecutado');
+// console.log('Método:', req.method, 'Ruta:', req.path); // Imprime el método y la ruta
 */
 export const allowCrossDomain = (req, res, next) => {
-  console.log('Middleware allowCrossDomain ejecutado');
-  
-  // Configuración CORS general
-  res.setHeader('Access-Control-Allow-Origin', 'https://rh-app.vercel.app');
+  const allowedOrigins = ['https://rh-app.vercel.app', 'https://rhapi-dev-kkbb.3.us-1.fl0.io/inmuebles'];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
