@@ -82,11 +82,12 @@ export const createInmueble = async (req, res) => {
     const nuevoInmueble = await Inmueble.create({ 
       nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, url_imagen
     });
-    res.send('Inmueble creado.');
+    
     const propiedad_id = nuevoInmueble.id;
     await ImagenInmueble.create({
       propiedad_id, url_imagen
     })
+    res.send('Inmueble e imagen creados.');
   } catch (err) {
     console.error(err);
     console.log("Error en createInmueble paso 3");
