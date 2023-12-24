@@ -84,8 +84,9 @@ export const createInmueble = async (req, res) => {
     });
     
     const propiedad_id = nuevoInmueble.id;
+    console.log("Propiedad_id:", propiedad_id);
     await ImagenInmueble.create({
-      propiedad_id, imagen_propiedad  
+      propiedad_id, imagen_propiedad
     })
     res.send({ message: 'Inmueble e imagen creados.', imagen_propiedad });
   } catch (err) {
