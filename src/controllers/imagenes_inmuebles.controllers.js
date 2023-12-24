@@ -36,9 +36,9 @@ export const uploadImage = async (req, res) => {
 
     // Sube la imagen a Cloudinary
     const result = await cloudinary.uploader.upload(image.path);
-    res.json({ success: true, result });
-      console.log(req.file.path);
-    return req.file.path //Revisar esta linea
+    console.log("La ruta de imagen es:",image.path);
+    // Devuelve la URL de la imagen en Cloudinary
+    return res.json({ success: true, imageUrl: result.url });
   } 
 }
     // La imagen ya se ha subido, no es necesario subirla nuevamente
