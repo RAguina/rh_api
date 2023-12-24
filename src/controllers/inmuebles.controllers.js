@@ -83,7 +83,7 @@ export const createInmueble = async (req, res) => {
       nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, url_imagen
     });
     res.send('Inmueble creado.');
-    const propiedad_id = nuevoInmueble;
+    const propiedad_id = nuevoInmueble.id;
     await ImagenInmueble.create({
       propiedad_id, url_imagen
     })
