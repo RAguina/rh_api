@@ -77,7 +77,7 @@ export const createInmueble = async (req, res) => {
     console.log("Hasta aca llega createInmueble paso1")
     console.log("Hasta aca llega createInmueble pASO 1 req.body:",req.body)
     const { nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, url_imagen } = req.body;
-    console.log("hasta aca llega(createInmueble paso2)", req.body.url_imagen);
+    console.log("hasta aca llega(createInmueble paso2)");
     // Inserta el nuevo usuario en la base de datos
     const nuevoInmueble = await Inmueble.create({ 
       nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, url_imagen
@@ -87,7 +87,7 @@ export const createInmueble = async (req, res) => {
     await ImagenInmueble.create({
       propiedad_id, url_imagen
     })
-    res.send('Inmueble e imagen creados.');
+    res.send('Inmueble e imagen creados.', url_imagen);
   } catch (err) {
     console.error(err);
     console.log("Error en createInmueble paso 3");
