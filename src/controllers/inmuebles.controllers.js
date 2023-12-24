@@ -77,7 +77,7 @@ export const createInmueble = async (req, res) => {
     console.log("Hasta aca llega createInmueble paso1")
     console.log("Hasta aca llega createInmueble pASO 1 req.body:",req.body)
     const { nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, url_imagen } = req.body;
-    console.log("hasta aca llega(createInmueble paso2)");
+    console.log("hasta aca llega(createInmueble paso2)", req.body.url_imagen);
     // Inserta el nuevo usuario en la base de datos
     const nuevoInmueble = await Inmueble.create({ 
       nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, url_imagen
