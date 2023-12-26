@@ -24,14 +24,13 @@
   app.use('/inmuebles', inmueblesRoutes);
   app.use('/imagen_inmuebles', imagenesInmueblesRoutes);
   app.use('/usuarios', usuariosRoutes);
-  app.use('/cargarInmuebles', cargarInmuebles);
 
   const port = process.env.PORT || 8080;
 
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(publicDirectory, 'index.html'));
   });
-  
+
   app.listen(port, () => {
     console.log(`Servidor corriendo en Puerto : ${port}`);
   });
