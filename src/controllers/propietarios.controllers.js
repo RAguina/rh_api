@@ -117,11 +117,13 @@ export const loginUser = async (req, res) => {
       return res.status(400).json({ message: 'Contraseña incorrecta' });
     }
 
-    // Si todo está bien, inicia la sesión del usuario
     // Aquí es donde normalmente crearías un token de sesión y lo enviarías al cliente
     const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    console.log('Inicio de sesión exitoso');
-    res.json({ token, message: 'Inicio de sesión exitoso' });
+
+    //Enviar la hora de creacion del token para finalizar la sesion
+    const now = new Date();
+    const expiry = now.getTime() + 3600000; 
+    res.json({ token, expiry, message: 'Inicio de sesión exitoso' });
   } catch (error) {
     console.error('Error del servidor:', error);
     res.status(500).json({ message: 'Error del servidor' });
