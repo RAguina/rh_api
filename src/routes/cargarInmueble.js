@@ -29,11 +29,15 @@ router.post('/cargarInmuebles', async (req,res) =>{
   });
 
   const propiedad_id = nuevoInmueble;
-  await ImagenInmueble.create({
-    propiedad_id, url_imagen
-  })
-  console.log("ImagenInmueble.propiedad_id",ImagenInmueble.propiedad_id);
-  console.log("ImagenInmueble.url_imagen",ImagenInmueble.url_imagen);
+  
+    // Para cada archivo subido, crea una nueva entrada en la tabla ImagenInmueble
+    req.files.forEach(async (file) => {
+      await ImagenInmueble.create({
+        propiedad_id, url_imagen: file.path
+      });
+    });
+ 
+    res.send('Inmueble creado con éxito.');
   
 });
 
