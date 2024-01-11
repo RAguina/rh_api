@@ -102,7 +102,7 @@ export const loginUser = async (req, res) => {
     // Verifica si el correo electrónico existe
     const emailExists = await emailExiste(email);
     console.log('El correo electrónico existe:', emailExists);
-    if (!emailExists) {
+    if (!emailExists) { 
       return res.status(400).json({ message: 'Correo electrónico incorrecto' });
     }
 
@@ -118,7 +118,7 @@ export const loginUser = async (req, res) => {
     }
 
     // Aquí es donde normalmente crearías un token de sesión y lo enviarías al cliente
-    const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ email: user.email, idPropietario: user.idPropietario }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     //Enviar la hora de creacion del token para finalizar la sesion
     const now = new Date();
