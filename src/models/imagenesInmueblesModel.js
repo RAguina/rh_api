@@ -15,6 +15,11 @@ const ImagenInmueble = sequelize.define('imagen_inmueble', {
   propiedad_id: {
     type: DataTypes.INTEGER,
     allowNull: true
+  },
+  is_cover: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
   }
 },{
   timestamps: true,

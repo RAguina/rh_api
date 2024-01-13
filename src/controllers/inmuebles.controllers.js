@@ -35,12 +35,12 @@ export const getDetallePropiedad = async (req, res) => {
 // Controlador para actualizar un inmueble
 export const updateInmueble = async (req, res) => {
   const { id } = req.params;
-  const { nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, imagen_propiedad } = req.body;
+  const { nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id} = req.body;
 
   try {
     const inmueble = await Inmueble.findByPk(id);
     if (inmueble) {
-      await inmueble.update({ nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, imagen_propiedad });
+      await inmueble.update({ nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id});
       res.send(`Inmueble con id ${id} actualizado.`);
     } else {
       res.status(404).send('Inmueble no encontrado');
@@ -76,19 +76,20 @@ export const createInmueble = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, imagen_propiedad } = req.body;
+    const { nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id } = req.body;
     
     // Inserta el nuevo usuario en la base de datos
     const nuevoInmueble = await Inmueble.create({ 
-      nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id, imagen_propiedad
+      nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id
     });
     
     const propiedad_id = nuevoInmueble.id;
     console.log("Propiedad_id:", propiedad_id);
+    /*Ya no va aca
     await ImagenInmueble.create({
       propiedad_id, imagen_propiedad
     })
-    res.send({ message: 'Inmueble e imagen creados.', imagen_propiedad });
+    */
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: err.message });

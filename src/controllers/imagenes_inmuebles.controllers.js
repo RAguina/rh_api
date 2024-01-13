@@ -37,56 +37,37 @@ export const uploadImage = async (req, res) => {
   } 
 }
 
-/*
-//(Version semi estable)Funcion que se encarga de registrar imagen en la base de datos
-export const uploadImage = async (req, res) => {
-  console.log("hola1");  // Asegúrate de que la imagen se está enviando en la solicitud
-  console.log("cuerpo del req:",req.body);
-  if (!req.files || !req.files.image) {
-    return res.status(400).json({ error: 'No se subió ninguna imagen.' });
-  }
-
-  // La imagen subida estará disponible en req.files.image
-  const image = req.files.image;
+// Supongamos que 'ImagenesInmuebles' es tu modelo Sequelize
+async function establecerComoPortada(idImagen) {
+  // Iniciar una transacción
+  const t = await sequelize.transaction();
 
   try {
-    // Sube la imagen a Cloudinary
-    const result = await cloudinary.uploader.upload(image.path);
-    result.then(()=>{
+    // Obtener la imagen
+    const imagen = await ImagenesInmuebles.findByPk(idImagen, { transaction: t });
 
-      console.log('secure_url:', result.secure_url);
-      console.log('public_id:', result.public_id);
-      console.log("Hola soy un breackpoint 1")
-    })
-
-
-    // Crea un nuevo registro en la base de datos para la imagen
-    const nuevaImagen = await ImagenInmueble.create({
-      propiedad_id: req.body.propiedad_id, // Ajusta según tu modelo
-      url: result.secure_url,
-      public_id: result.public_id,
+    // Obtener todas las imágenes de la misma propiedad
+    const imagenesPropiedad = await ImagenesInmuebles.findAll({
+      where: { propiedad_id: imagen.propiedad_id },
+      transaction: t
     });
-    console.log("nueva imagen:", nuevaImagen);
 
-    // Usa la constante file en tu lógica, por ejemplo:
-    console.log("Información de la imagen procesada:", image);
-
-    // Devuelve el resultado de la subida
-    res.json(result);
-  } catch (error) {
-    console.error("Error durante el proceso:", error);
-
-    // Maneja cualquier error que ocurra durante el proceso
-    if (error instanceof multer.MulterError) {
-      // Error de multer al procesar la imagen
-      res.status(400).json({ error: 'Error al procesar la imagen.' });
-    } else if (error.message === 'Formato de imagen no válido.') {
-      // Puedes personalizar este mensaje según tus necesidades
-      res.status(400).json({ error: 'Formato de imagen no válido.' });
-    } else {
-      // Otros errores
-      res.status(500).json({ error: 'Hubo un error durante el proceso.' });
+    // Establecer 'is_cover' en 'false' para todas las imágenes de la propiedad
+    for (let img of imagenesPropiedad) {
+      img.is_cover = false;
+      await img.save({ transaction: t });
     }
+
+    // Establecer 'is_cover' en 'true' para la imagen seleccionada
+    imagen.is_cover = true;
+    await imagen.save({ transaction: t });
+
+    // Confirmar la transacción
+    await t.commit();
+  } catch (error) {
+    // Si algo sale mal, revertir la transacción
+    await t.rollback();
+    throw error;
   }
-};
-*/
+}
+
