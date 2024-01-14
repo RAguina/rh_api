@@ -82,7 +82,7 @@ export const createInmueble = async (req, res) => {
     const nuevoInmueble = await Inmueble.create({ 
       nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id
     });
-    console.log("nuevoInmueble", nuevoInmueble.id_propiedad)
+    console.log("nuevoInmueble:", nuevoInmueble.id_propiedad)
     res.json({ propiedad_id: nuevoInmueble.id_propiedad });
       /*Ya no va aca
     await ImagenInmueble.create({
