@@ -21,7 +21,7 @@ export const getImagenesInmueble = async (req, res) => {
 };
 
 export const uploadImage = async (req, res) => {
-
+  console.log("req.file.path en uploadImage",req.file.path);
   // Si el cuerpo de la solicitud no contiene la imagen sino sube la imagen a Cloudinary
   if (!req.file) {
     return res.status(400).json({ error: 'No se subió ninguna imagen.' });
@@ -29,9 +29,9 @@ export const uploadImage = async (req, res) => {
   else {
     const image = req.file;
 
+    console.log("La ruta de imagen es:",image.path);
     // Sube la imagen a Cloudinary
     const result = await cloudinary.uploader.upload(image.path);
-    console.log("La ruta de imagen es:",image.path);
     // Devuelve la URL de la imagen en Cloudinary
     return res.json({ success: true, imageUrl: result.url });
   } 
