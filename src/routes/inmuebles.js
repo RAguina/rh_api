@@ -13,10 +13,10 @@ router.get('/:id', getDetallePropiedad);
 // Ruta para actualizar un inmueble
 router.put('/:id', updateInmueble);
 
-// Ruta para eliminar un inmueble
-router.delete('/:id', deleteInmueble);
-
 // Ruta para crear un nuevo inmueble
 router.post('/', createInmueble);
+
+// Ruta para eliminar un inmueble
+router.delete('/:id', deleteInmueble);
 
 export default router;
