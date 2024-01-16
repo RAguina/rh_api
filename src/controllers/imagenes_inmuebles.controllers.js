@@ -27,6 +27,7 @@ export const uploadImage = async (req, res) => {
     return res.status(400).json({ error: 'No se subió ninguna imagen.' });
   } 
   else {
+    console.log("req.file iic:",req.file);
     const image = req.file;
 
     console.log("La ruta de imagen es:",image.path);
