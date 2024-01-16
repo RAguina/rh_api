@@ -34,6 +34,7 @@ export const getDetallePropiedad = async (req, res) => {
 
 // Controlador para actualizar un inmueble
 export const updateInmueble = async (req, res) => {
+  console.log("hola soy un consolelog en updateinmueble");
   const { id } = req.params;
   const { nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id} = req.body;
 
@@ -84,11 +85,7 @@ export const createInmueble = async (req, res) => {
     });
     console.log("nuevoInmueble:", nuevoInmueble.id_propiedad)
     res.json({ propiedad_id: nuevoInmueble.id_propiedad });
-      /*Ya no va aca
-    await ImagenInmueble.create({
-      propiedad_id, imagen_propiedad
-    })
-    */
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: err.message });
