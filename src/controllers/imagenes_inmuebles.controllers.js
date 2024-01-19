@@ -40,7 +40,7 @@ export const uploadImage = async (req, res) => {
       is_cover: req.body.is_cover, // Usa el valor is_cover del cuerpo de la solicitud
     });
     // Devuelve la URL de la imagen en Cloudinary
-    return res.json({ success: true, imageUrl: result.url, imageDetails: newImagenInmueble });
+    return res.json({ success: true, imageDetails: newImagenInmueble });
   } 
 }
 
