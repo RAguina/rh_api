@@ -1,7 +1,7 @@
   import express from 'express';
   import { allowCrossDomain } from './middleware/cors.js';
   import { fileURLToPath } from 'url';
-  import { dirname, join } from 'path';
+  import path, { dirname, join } from 'path';
   import inmueblesRoutes from './routes/inmuebles.js';
   import imagenesInmueblesRoutes from './routes/imagenes_inmuebles.routes.js';
   import usuariosRoutes from './routes/propietarios.js';
