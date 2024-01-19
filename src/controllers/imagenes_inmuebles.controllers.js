@@ -31,11 +31,11 @@ export const uploadImage = async (req, res) => {
 
     console.log("La ruta de imagen es:",image.path);
     // Sube la imagen a Cloudinary
-    const result = await cloudinary.uploader.upload(image.path);
-    console.log("Resultado de la subida a Cloudinary:", result); // Imprime el resultado de la subida a Cloudinary
+   // const result = await cloudinary.uploader.upload(image.path);
+    //console.log("Resultado de la subida a Cloudinary:", result); // Imprime el resultado de la subida a Cloudinary
     // Crea un nuevo registro en la tabla imagen_inmuebles
     const newImagenInmueble = await ImagenInmueble.create({
-      url_imagen: result.url,
+      url_imagen: image.path,
       propiedad_id: req.body.propietario_id, // Usa el idPropietario del cuerpo de la solicitud
       is_cover: req.body.is_cover, // Usa el valor is_cover del cuerpo de la solicitud
     });
