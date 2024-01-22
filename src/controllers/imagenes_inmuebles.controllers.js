@@ -26,13 +26,8 @@
       return res.status(400).json({ error: 'No se subió ninguna imagen.' });
     } 
     else {
-      console.log("req.file iic:",req.file);
       const image = req.file;
 
-      console.log("La ruta de imagen es:",image.path);
-      // Sube la imagen a Cloudinary
-    // const result = await cloudinary.uploader.upload(image.path);
-      //console.log("Resultado de la subida a Cloudinary:", result); // Imprime el resultado de la subida a Cloudinary
       // Crea un nuevo registro en la tabla imagen_inmuebles
       const newImagenInmueble = await ImagenInmueble.create({
         url_imagen: image.path,
@@ -58,7 +53,8 @@
       if (!imagenPortada) {
         return res.status(404).json({ error: 'No se encontró una imagen de portada para el inmueble con ID proporcionado.' });
       }
-
+      console.log("La url que esta devolviendo es:",imagenPortada.url);
+      console.log("La url que esta devolviendo es2:",imagenPortada);
       res.json(imagenPortada.url);
     } catch (err) {
       console.error(err);
