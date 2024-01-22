@@ -44,6 +44,28 @@ export const uploadImage = async (req, res) => {
   } 
 }
 
+export const getImagenPortadaByInmuebleId = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const imagenPortada = await ImagenInmueble.findOne({
+      where: {
+        propiedad_id: id,
+        is_cover: true,
+      },
+    });
+
+    if (!imagenPortada) {
+      return res.status(404).json({ error: 'No se encontró una imagen de portada para el inmueble con ID proporcionado.' });
+    }
+
+    res.json(imagenPortada);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error al obtener la imagen de portada');
+  }
+};
+
 // Supongamos que 'ImagenesInmuebles' es tu modelo Sequelize
 async function establecerComoPortada(idImagen) {
   // Iniciar una transacción
