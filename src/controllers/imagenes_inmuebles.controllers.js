@@ -59,7 +59,7 @@
         return res.status(404).json({ error: 'No se encontró una imagen de portada para el inmueble con ID proporcionado.' });
       }
 
-      res.json(imagenPortada);
+      res.json(imagenPortada.url);
     } catch (err) {
       console.error(err);
       res.status(500).send('Error al obtener la imagen de portada');
