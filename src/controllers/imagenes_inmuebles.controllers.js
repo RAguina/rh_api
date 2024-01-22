@@ -53,9 +53,7 @@
       if (!imagenPortada) {
         return res.status(404).json({ error: 'No se encontró una imagen de portada para el inmueble con ID proporcionado.' });
       }
-      console.log("La url que esta devolviendo es:",imagenPortada.url);
-      console.log("La url que esta devolviendo es2:",imagenPortada);
-      res.json(imagenPortada.url);
+      res.json(imagenPortada.url_imagen);
     } catch (err) {
       console.error(err);
       res.status(500).send('Error al obtener la imagen de portada');
