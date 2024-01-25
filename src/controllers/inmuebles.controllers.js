@@ -77,6 +77,8 @@ export const createInmueble = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
+    const { nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id } = req.body;
+
     try {
       // Inserta el nuevo usuario en la base de datos
       const nuevoInmueble = await Inmueble.create({ 
