@@ -8,22 +8,27 @@
   import morgan from 'morgan';
 
   const app = express();
-
-  app.use(allowCrossDomain);
-  app.use(morgan('dev'));
-
-  app.use(express.json());  
-  app.use(express.urlencoded({ extended: true }));
-
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
-
   const publicDirectory = join(__dirname, 'public');
 
+/* Middleware CORS*/
+  app.use(allowCrossDomain);
+
+/* DEV: Middleware MORGAN*/
+  app.use(morgan('dev'));
+
+/* Middleware express*/
+  app.use(express.json());  
+  app.use(express.urlencoded({ extended: true }));
   app.use(express.static(publicDirectory));
+
+/* Middleware Routes */
   app.use('/inmuebles', inmueblesRoutes);
   app.use('/imagen_inmuebles', imagenesInmueblesRoutes);
   app.use('/usuarios', usuariosRoutes);
+
+
 
   const port = process.env.PORT || 8080;
 
