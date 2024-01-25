@@ -77,20 +77,46 @@ export const createInmueble = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id } = req.body;
-    
-    // Inserta el nuevo usuario en la base de datos
-    const nuevoInmueble = await Inmueble.create({ 
-      nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id
-    });
-    console.log("nuevoInmueble:", nuevoInmueble.id_propiedad)
-    res.json({ nuevoInmueble });
+    try {
+      // Inserta el nuevo usuario en la base de datos
+      const nuevoInmueble = await Inmueble.create({ 
+        nombre_propiedad, descripcion, tipo_propiedad, ubicacion_propiedad, precio_propiedad, estado_propiedad, propietario_id
+      });
+      console.log("nuevoInmueble:", nuevoInmueble.id_propiedad)
+      res.json({ nuevoInmueble });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Error al crear el inmueble: " + err.message });
+    }
 
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: "Error general: " + err.message });
   } 
 };
+
+export const agregarCoordenadas = async (req, res) => {
+  try {
+    const { id_propiedad, latitud, longitud } = req.body;
+
+    // Busca el inmueble por id
+    const inmueble = await Inmueble.findByPk(id_propiedad);
+    if (!inmueble) {
+      return res.status(404).json({ message: "Inmueble no encontrado" });
+    }
+
+    // Actualiza la latitud y la longitud
+    inmueble.latitud = latitud;
+    inmueble.longitud = longitud;
+    await inmueble.save();
+
+    res.json({ inmueble });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error al actualizar las coordenadas: " + err.message });
+  }
+};
+
 /*
 // Controlador para crear un nuevo inmueble
 export const createInmueble = async (req, res) => {

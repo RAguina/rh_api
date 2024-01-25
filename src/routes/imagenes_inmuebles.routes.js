@@ -9,7 +9,7 @@ router.get('/:id', getImagenesInmueble);
 
 router.get('/portada/:id', getImagenPortadaByInmuebleId);
 
-router.post('/upload',// authenticateJWT, 
+router.post('/upload',/* authenticateJWT, */
   parser.single('image'), uploadImage);
 
 export default router;

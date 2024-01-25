@@ -35,6 +35,14 @@ const Inmueble = sequelize.define('inmueble', {
   propietario_id: {
     type: DataTypes.INTEGER,
     allowNull: false
+  },
+  latitud: {
+    type: DataTypes.DECIMAL(9,6),
+    allowNull: true
+  },
+  longitud: {
+    type: DataTypes.DECIMAL(9,6),
+    allowNull: true
   }
 }, 
   {

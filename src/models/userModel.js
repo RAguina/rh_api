@@ -56,6 +56,7 @@ Usuario.addHook('beforeCreate', async (usuario) => {
 Usuario.prototype.verifyPassword = async function (password) {
   return await argon2.verify(this.password, password);
 };
+export default Usuario;
 /*
 Usuario.prototype.hashPassword = async function (password) {
   const salt = crypto.randomBytes(16);
@@ -74,4 +75,3 @@ Usuario.addHook('beforeCreate', async (usuario) => {
   usuario.password = hashedPassword;
 });
 */
-export default Usuario;
