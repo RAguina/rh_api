@@ -14,7 +14,7 @@ router.get('/:id', getDetallePropiedad);
 router.put('/:id', updateInmueble);
 
 // Ruta para agregar coordenadas a un inmueble
-router.put('/:id/agregarCoordenadas', agregarCoordenadas);
+router.put('/:id', agregarCoordenadas);
 
 // Ruta para crear un nuevo inmueble
 router.post('/', createInmueble);
