@@ -99,7 +99,7 @@ export const createInmueble = async (req, res) => {
 
 export const agregarCoordenadas = async (req, res) => {
   try {
-    const { id_propiedad, latitud, longitud } = req.body;
+    const { propiedadId, latitud, longitud } = req.body;
 
     // Busca el inmueble por id
     const inmueble = await Inmueble.findByPk(id_propiedad);
