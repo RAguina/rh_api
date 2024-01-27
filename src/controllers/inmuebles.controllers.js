@@ -100,13 +100,13 @@ export const createInmueble = async (req, res) => {
 export const agregarCoordenadas = async (req, res) => {
   try {
     const { propiedadId, latitud, longitud } = req.body;
-
+    console.log('Entré a agregarCoordenadas');
     // Busca el inmueble por id
     const inmueble = await Inmueble.findByPk(propiedadId);
     if (!inmueble) {
       return res.status(404).json({ message: "Inmueble no encontrado" });
     }
-
+    
       // Verifica que los campos latitud y longitud no estén vacíos
     if (!latitud || !longitud) {
       return res.status(400).json({ message: "Los campos latitud y longitud no pueden estar vacíos" });
