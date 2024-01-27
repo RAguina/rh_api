@@ -102,7 +102,7 @@ export const agregarCoordenadas = async (req, res) => {
     const { propiedadId, latitud, longitud } = req.body;
 
     // Busca el inmueble por id
-    const inmueble = await Inmueble.findByPk(id_propiedad);
+    const inmueble = await Inmueble.findByPk(propiedadId);
     if (!inmueble) {
       return res.status(404).json({ message: "Inmueble no encontrado" });
     }
