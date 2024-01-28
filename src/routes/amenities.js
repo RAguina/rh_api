@@ -4,7 +4,7 @@ import {
   obtenerComodidadesPorPropiedadId,
   crearComodidades,
   actualizarComodidades,
-} from '../controllers/amenities.controller.js'; // Asegúrate de tener el nombre correcto del controlador
+} from '../controllers/amenities.controllers.js'; // Asegúrate de tener el nombre correcto del controlador
 import { authenticateJWT } from '../middleware/jwt.js';
 
 const router = express.Router();
