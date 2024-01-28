@@ -19,7 +19,11 @@ export const obtenerComodidadesPorPropiedadId = async (req, res) => {
 
 // Controlador para crear comodidades para una propiedad
 export const crearComodidades = async (req, res) => {
+  console.log('Llegó a crearComodidades');
   const { propiedadId } = req.params;
+  const propiedadId2 = req.params.propiedad_id;
+  console.log('propiedadId:', propiedadId);
+  console.log('propiedadId2:', propiedadId2);
   const {
     airConditioning,
     heating,
