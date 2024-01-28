@@ -115,7 +115,9 @@ export const agregarCoordenadas = async (req, res) => {
     // Actualiza la latitud y la longitud
     inmueble.latitud = latitud;
     inmueble.longitud = longitud;
+    console.log("aca fallan las coordenadas, v1");
     await inmueble.save();
+    console.log("aca fallan las coordenadas, v2");
 
     res.json({ inmueble });
   } catch (err) {
