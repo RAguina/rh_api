@@ -99,7 +99,8 @@ export const createInmueble = async (req, res) => {
 
 export const agregarCoordenadas = async (req, res) => {
   try {
-    const { id_propiedad, latitud, longitud } = req.body;
+    const { latitud, longitud } = req.body;
+    const id_propiedad = req.params.id_propiedad;   
     console.log('req.body',req.body);
     console.log('Entré a agregarCoordenadas y este es el id propiedad', id_propiedad, 'este es latitud:',latitud, 'y este es longitud',longitud );
     // Busca el inmueble por id
