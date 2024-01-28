@@ -101,8 +101,6 @@ export const agregarCoordenadas = async (req, res) => {
   try {
     const { latitud, longitud } = req.body;
     const id_propiedad = req.params.id_propiedad;   
-    console.log('req.body',req.body);
-    console.log('Entré a agregarCoordenadas y este es el id propiedad', id_propiedad, 'este es latitud:',latitud, 'y este es longitud',longitud );
     // Busca el inmueble por id
     const inmueble = await Inmueble.findByPk(id_propiedad);
     if (!inmueble) {
@@ -117,9 +115,7 @@ export const agregarCoordenadas = async (req, res) => {
     // Actualiza la latitud y la longitud
     inmueble.latitud = latitud;
     inmueble.longitud = longitud;
-    console.log("aca fallan las coordenadas, v1");
     await inmueble.save();
-    console.log("aca fallan las coordenadas, v2");
 
     res.json({ inmueble });
   } catch (err) {

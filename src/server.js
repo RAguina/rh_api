@@ -5,6 +5,7 @@
   import inmueblesRoutes from './routes/inmuebles.js';
   import imagenesInmueblesRoutes from './routes/imagenes_inmuebles.routes.js';
   import usuariosRoutes from './routes/propietarios.js';
+  import amenitiesRoutes from './routes/amenities.js';
   import morgan from 'morgan';
 
   const app = express();
@@ -27,6 +28,7 @@
   app.use('/inmuebles', inmueblesRoutes);
   app.use('/imagen_inmuebles', imagenesInmueblesRoutes);
   app.use('/usuarios', usuariosRoutes);
+  app.use('/amenities', amenitiesRoutes);
 
 
 
