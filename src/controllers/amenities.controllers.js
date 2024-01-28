@@ -25,7 +25,7 @@ export const crearComodidades = async (req, res) => {
   console.log('propiedadId:', propiedadId);
   console.log('propiedadId2:', propiedadId2);
   const {
-    airConditioning,
+    airconditioning,
     heating,
     garage,
     garden,
@@ -34,16 +34,16 @@ export const crearComodidades = async (req, res) => {
     tv,
     wifi,
     pets,
-    youngGroup,
-    ecoFriendly,
-    checkIn,
-    checkOut
+    younggroup,
+    ecofriendly,
+    checkin,
+    checkout
   } = req.body;
 
   try {
     const nuevasComodidades = await Amenities.create({
       propiedad_id: propiedadId,
-      airConditioning,
+      airconditioning,
       heating,
       garage,
       garden,
@@ -52,10 +52,10 @@ export const crearComodidades = async (req, res) => {
       tv,
       wifi,
       pets,
-      youngGroup,
-      ecoFriendly,
-      checkIn,
-      checkOut
+      younggroup,
+      ecofriendly,
+      checkin,
+      checkout
     });
     res.json(nuevasComodidades);
   } catch (err) {
@@ -68,7 +68,7 @@ export const crearComodidades = async (req, res) => {
 export const actualizarComodidades = async (req, res) => {
   const { propiedadId } = req.params;
   const {
-    airConditioning,
+    airconditioning,
     heating,
     garage,
     garden,
@@ -77,10 +77,10 @@ export const actualizarComodidades = async (req, res) => {
     tv,
     wifi,
     pets,
-    youngGroup,
-    ecoFriendly,
-    checkIn,
-    checkOut
+    younggroup,
+    ecofriendly,
+    checkin,
+    checkout
   } = req.body;
 
   try {
@@ -95,7 +95,7 @@ export const actualizarComodidades = async (req, res) => {
     }
 
     // Actualizar campos de comodidades
-    comodidades.airConditioning = airConditioning;
+    comodidades.airconditioning = airconditioning;
     comodidades.heating = heating;
     comodidades.garage = garage;
     comodidades.garden = garden;
@@ -104,10 +104,10 @@ export const actualizarComodidades = async (req, res) => {
     comodidades.tv = tv;
     comodidades.wifi = wifi;
     comodidades.pets = pets;
-    comodidades.youngGroup = youngGroup;
-    comodidades.ecoFriendly = ecoFriendly;
-    comodidades.checkIn = checkIn;
-    comodidades.checkOut = checkOut;
+    comodidades.younggroup = younggroup;
+    comodidades.ecofriendly = ecofriendly;
+    comodidades.checkin = checkin;
+    comodidades.checkout = checkout;
 
     await comodidades.save();
     

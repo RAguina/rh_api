@@ -9,7 +9,7 @@ const Amenities = sequelize.define('amenities', {
     primaryKey: true,
     autoIncrement: true
   },
-  airConditioning: {
+  airconditioning: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false
@@ -54,22 +54,22 @@ const Amenities = sequelize.define('amenities', {
     allowNull: false,
     defaultValue: false
   },
-  youngGroup: {
+  younggroup: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false
   },
-  ecoFriendly: {
+  ecofriendly: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false
   },
-  checkIn: {
+  checkin: {
     type: DataTypes.TIME,
     allowNull: true
     // Ajusta según tus necesidades, si el checkIn puede ser nulo
   },
-  checkOut: {
+  checkout: {
     type: DataTypes.TIME,
     allowNull: true
     // Ajusta según tus necesidades, si el checkOut puede ser nulo
