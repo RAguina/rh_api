@@ -118,8 +118,8 @@ export const loginUser = async (req, res) => {
     }
 
     // Aquí es donde normalmente crearías un token de sesión y lo enviarías al cliente
-    const token = jwt.sign({ email: user.email, idPropietario: user.idPropietario }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    console.log('idPropietario en el token:', user.idPropietario);
+    const token = jwt.sign({ email: user.email, idPropietario: user.id_usuario }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    console.log('idPropietario en el token:', user.id_usuario);
     //Enviar la hora de creacion del token para finalizar la sesion
     const now = new Date();
     const expiry = now.getTime() + 3600000; 
