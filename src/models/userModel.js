@@ -32,7 +32,7 @@ const Usuario = sequelize.define('usuario', {
   },
   rol_id:{
     type: DataTypes.INTEGER,
-    allowNull:false
+    defaultValue: 1
   }
 }, {
   timestamps: true,
