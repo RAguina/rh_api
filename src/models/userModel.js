@@ -30,7 +30,10 @@ const Usuario = sequelize.define('usuario', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  es_propietario: DataTypes.BOOLEAN
+  rol_id:{
+    type: DataTypes.INTEGER,
+    allowNull:false
+  }
 }, {
   timestamps: true,
   createdAt: 'createdat',
@@ -51,27 +54,10 @@ Usuario.prototype.hashPassword = async function (password) {
 
 Usuario.addHook('beforeCreate', async (usuario) => {
   usuario.password = await usuario.hashPassword(usuario.password);
+  usuario.rol_id = 1;
 });
 
 Usuario.prototype.verifyPassword = async function (password) {
   return await argon2.verify(this.password, password);
 };
 export default Usuario;
-/*
-Usuario.prototype.hashPassword = async function (password) {
-  const salt = crypto.randomBytes(16);
-  const hashedPassword = await argon2id.hash(password, {
-    salt: salt,
-    timeCost: 4,
-    memoryCost: 13,
-    parallelism: 2,
-    type: argon2id.argon2id
-  });
-  this.password = hashedPassword;
-};
-
-Usuario.addHook('beforeCreate', async (usuario) => {
-  const hashedPassword = await usuario.hashPassword(usuario.password);
-  usuario.password = hashedPassword;
-});
-*/

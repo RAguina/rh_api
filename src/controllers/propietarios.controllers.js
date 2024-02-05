@@ -78,7 +78,7 @@ export const createUser = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { nombre, apellido, ciudad, email, password, es_propietario } = req.body;
+    const { nombre, apellido, ciudad, email, password, rol_id} = req.body;
   
     // Verifica si el email ya existe
     if (await emailExiste(email)) {
@@ -86,7 +86,7 @@ export const createUser = async (req, res) => {
     }
     
     // Inserta el nuevo usuario en la base de datos
-    await Usuario.create({ nombre, apellido, ciudad, email, password, es_propietario });
+    await Usuario.create({ nombre, apellido, ciudad, email, password, rol_id });
     res.send('Usuario creado.');
   } catch (err) {
     console.error(err);
