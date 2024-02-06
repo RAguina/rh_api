@@ -9,6 +9,7 @@
   import amenitiesRoutes from './routes/amenities.js';
   import adminRoutes from './routes/admin.routes.js';
   import morgan from 'morgan';
+  import { authenticateJWT } from './middleware/jwt.js';
 
   const app = express();
   const __filename = fileURLToPath(import.meta.url);
