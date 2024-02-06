@@ -1,3 +1,6 @@
+import express from 'express';
+const router = express.Router();
+
 router.get('/adminPanel', async (req, res) => {
   const usuario = req.user;
 
@@ -7,3 +10,5 @@ router.get('/adminPanel', async (req, res) => {
     permisos: await casbinEnforcer.getPermissionsForUser(usuario.rol_id),
   });
 });
+
+export default router;
