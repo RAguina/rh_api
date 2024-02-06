@@ -7,7 +7,7 @@
   import imagenesInmueblesRoutes from './routes/imagenes_inmuebles.routes.js';
   import usuariosRoutes from './routes/propietarios.js';
   import amenitiesRoutes from './routes/amenities.js';
-  import adminRoutes from './routes/admin_routes.js';
+  import adminRoutes from './routes/admin.routes.js';
   import morgan from 'morgan';
 
   const app = express();
