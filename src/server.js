@@ -1,11 +1,13 @@
   import express from 'express';
   import { allowCrossDomain } from './middleware/cors.js';
+  import { checkPermission } from './utils/auth.js';
   import { fileURLToPath } from 'url';
   import path, { dirname, join } from 'path';
   import inmueblesRoutes from './routes/inmuebles.js';
   import imagenesInmueblesRoutes from './routes/imagenes_inmuebles.routes.js';
   import usuariosRoutes from './routes/propietarios.js';
   import amenitiesRoutes from './routes/amenities.js';
+  import adminRoutes from './routes/admin_routes.js';
   import morgan from 'morgan';
 
   const app = express();
@@ -29,6 +31,11 @@
   app.use('/imagen_inmuebles', imagenesInmueblesRoutes);
   app.use('/usuarios', usuariosRoutes);
   app.use('/amenities', amenitiesRoutes);
+
+ 
+  app.use('/admin', authenticateJWT, checkPermission, adminRoutes);
+ // app.use(authenticateJWT, checkPermission);
+ // app.use('/admin', adminRoutes);
 
 
 
