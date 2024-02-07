@@ -1,5 +1,5 @@
 import { SequelizeAdapter } from 'sequelize-adapter';
-import { obtenerRolUsuario } from './controllers/propietarios.controllers';
+import { obtenerRolUsuario } from './controllers/propietarios.controllers.js';
 
 const sequelizeAdapter = new SequelizeAdapter(sequelize);
 
