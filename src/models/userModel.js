@@ -2,8 +2,6 @@ import { DataTypes } from 'sequelize';
 import sequelize from '../config/db.js';
 import crypto from "crypto";
 import argon2 from 'argon2';
-import Casbin from 'casbin';
-import SequelizeAdapter from 'sequelize-adapter'; 
 
 const Usuario = sequelize.define('usuario', {
   id_usuario: {
@@ -96,17 +94,12 @@ Usuario.cambiarRol = async function(idUsuario, nuevoRol) {
 
   return usuario;
 };
-
+/*
 // Configura el adaptador Sequelize para Casbin
 const adapter = new SequelizeAdapter(sequelize);
 const casbinEnforcer = new Casbin.Enforcer('model.conf', adapter);
 
 // Carga las políticas desde la base de datos (si es necesario)
 await adapter.loadPolicies();
-
+*/
 export default Usuario;
-
-export const hasPermission = async (usuario, permiso) => {
-  const rolUsuario = await usuario.getRol();
-  return casbinEnforcer.enforce(rolUsuario.nombre, permiso);
-};

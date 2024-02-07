@@ -118,7 +118,11 @@ export const loginUser = async (req, res) => {
     }
 
     // Aquí es donde normalmente crearías un token de sesión y lo enviarías al cliente
-    const token = jwt.sign({ email: user.email, idPropietario: user.id_usuario }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ 
+      email: user.email, 
+      idPropietario: user.id_usuario,
+      roles: user.rol_id
+    }, process.env.JWT_SECRET, { expiresIn: '1h' });
     console.log('idPropietario en el token:', user.id_usuario);
     //Enviar la hora de creacion del token para finalizar la sesion
     const now = new Date();
@@ -138,6 +142,20 @@ export const cambiarRolDeUsuario = async (idUsuario, nuevoRol) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+export const obtenerRolUsuario = async (usuario) => {
+  const usuarioConRol = await Usuario.findByPk(usuario.id, {
+    attributes: ['rol_id'],
+    include: [
+      {
+        model: sequelize.models.Rol, // Asumiento que tu modelo de roles se llama 'Rol'
+        attributes: ['nombre'],
+      },
+    ],
+  });
+
+  return usuarioConRol.rol.nombre; // Retornar el nombre del rol
 };
 
 
