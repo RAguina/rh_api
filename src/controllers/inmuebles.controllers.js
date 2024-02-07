@@ -124,6 +124,7 @@ export const agregarCoordenadas = async (req, res) => {
   }
 };
 
+
 /*
 // Controlador para crear un nuevo inmueble
 export const createInmueble = async (req, res) => {
