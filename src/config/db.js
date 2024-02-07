@@ -1,11 +1,3 @@
-
-/*
-const sequelize = new Sequelize('rent_house', 'postgres', 'admin', {
-  host: 'localhost',
-  dialect: 'postgres',
-  port: 5432
-});
-*/
 import { Sequelize } from 'sequelize';
 
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
