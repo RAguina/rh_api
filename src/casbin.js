@@ -1,6 +1,6 @@
 import SequelizeAdapter from 'sequelize-adapter';
 import { obtenerRolUsuario } from './controllers/propietarios.controllers.js';
-import sequelize from '../config/db.js'
+import sequelize from './config/db.js'
 
 const sequelizeAdapter = new SequelizeAdapter(sequelize);
 
