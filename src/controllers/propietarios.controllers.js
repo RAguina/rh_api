@@ -130,6 +130,16 @@ export const loginUser = async (req, res) => {
   }
 };
 
+/* Controlador para cambiar el Rol de un usuario(int) */
+export const cambiarRolDeUsuario = async (idUsuario, nuevoRol) => {
+  try {
+    const usuario = await Usuario.cambiarRol(idUsuario, nuevoRol);
+    console.log(`El rol del usuario ${usuario.nombre} ha sido cambiado a ${usuario.rol_id}`);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 
 /*
 // Controlador para iniciar sesión

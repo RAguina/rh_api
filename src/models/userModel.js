@@ -1,7 +1,9 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/db.js';
 import crypto from "crypto";
-import argon2 from 'argon2'; 
+import argon2 from 'argon2';
+import Casbin from 'casbin';
+import SequelizeAdapter from 'sequelize-adapter'; 
 
 const Usuario = sequelize.define('usuario', {
   id_usuario: {
@@ -32,7 +34,11 @@ const Usuario = sequelize.define('usuario', {
   },
   rol_id:{
     type: DataTypes.INTEGER,
-    defaultValue: 1
+    defaultValue: 1,
+    references: {
+      model: 'roles',
+      key: 'id'
+    }
   }
 }, {
   timestamps: true,
@@ -54,10 +60,53 @@ Usuario.prototype.hashPassword = async function (password) {
 
 Usuario.addHook('beforeCreate', async (usuario) => {
   usuario.password = await usuario.hashPassword(usuario.password);
-  usuario.rol_id = 1;
+  const errors = [];
+
+  if (!usuario.nombre) {
+    errors.push('El nombre del usuario es obligatorio');
+  }
+
+  if (!usuario.email || !/^[\w-\.]+@[\w-\.]+\.[a-z]{2,}$/.test(usuario.email)) {
+    errors.push('Debes ingresar un email válido');
+  }
+
+  if (!usuario.ciudad) {
+    errors.push('La ciudad del usuario es obligatoria');
+  }
+
+  if (errors.length > 0) {
+    throw new Error('Error al crear el usuario: ' + errors.join(', '));
+  }
+  
+  if (!usuario.rol_id) {
+    usuario.rol_id = 1;
+  }
 });
 
 Usuario.prototype.verifyPassword = async function (password) {
   return await argon2.verify(this.password, password);
 };
+
+Usuario.cambiarRol = async function(idUsuario, nuevoRol) {
+  const usuario = await this.findByPk(idUsuario);
+  if (!usuario) throw new Error('Usuario no encontrado');
+
+  usuario.rol_id = nuevoRol;
+  await usuario.save();
+
+  return usuario;
+};
+
+// Configura el adaptador Sequelize para Casbin
+const adapter = new SequelizeAdapter(sequelize);
+const casbinEnforcer = new Casbin.Enforcer('model.conf', adapter);
+
+// Carga las políticas desde la base de datos (si es necesario)
+await adapter.loadPolicies();
+
 export default Usuario;
+
+export const hasPermission = async (usuario, permiso) => {
+  const rolUsuario = await usuario.getRol();
+  return casbinEnforcer.enforce(rolUsuario.nombre, permiso);
+};
