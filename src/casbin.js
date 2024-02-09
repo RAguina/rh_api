@@ -1,6 +1,7 @@
 import { SequelizeAdapter } from 'casbin-sequelize-adapter';
 import { obtenerRolUsuario } from './controllers/propietarios.controllers.js';
 import sequelize from './config/db.js'
+import Enforcer from 'casbin'
 
 const sequelizeAdapter = new SequelizeAdapter(sequelize);
 
