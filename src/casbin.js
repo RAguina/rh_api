@@ -1,13 +1,15 @@
 import { SequelizeAdapter } from 'casbin-sequelize-adapter';
 import { obtenerRolUsuario } from './controllers/propietarios.controllers.js';
 import sequelize from './config/db.js'
-import Enforcer from 'casbin'
+import casbin from 'casbin'
 
-const sequelizeAdapter = new SequelizeAdapter(sequelize);
 
-const casbinEnforcer = new Casbin.Enforcer('./config/model.conf', sequelizeAdapter);
+
+
 
 export const hasPermission = async (usuario, permiso) => {
+  const sequelizeAdapter = await SequelizeAdapter(sequelize);
+  const casbinEnforcer = new casbin.newEnforcer('./config/model.conf', sequelizeAdapter);
   try {
     const rolUsuario = await obtenerRolUsuario(usuario);
     return casbinEnforcer.enforce(rolUsuario, permiso);
