@@ -7,8 +7,14 @@ const sequelizeAdapter = new SequelizeAdapter(sequelize);
 const casbinEnforcer = new Casbin.Enforcer('./config/model.conf', sequelizeAdapter);
 
 export const hasPermission = async (usuario, permiso) => {
-  const rolUsuario = await obtenerRolUsuario(usuario);
-  return casbinEnforcer.enforce(rolUsuario, permiso);
+  try {
+    const rolUsuario = await obtenerRolUsuario(usuario);
+    return casbinEnforcer.enforce(rolUsuario, permiso);
+  } catch (error) {
+    // Manejar el error
+    console.error(error);
+    throw new Error('Error al verificar el permiso');
+  }
 };
 
 
