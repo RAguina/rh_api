@@ -94,6 +94,9 @@ Usuario.cambiarRol = async function(idUsuario, nuevoRol) {
 
   return usuario;
 };
+
+export default Usuario;
+
 /*
 // Configura el adaptador Sequelize para Casbin
 const adapter = new SequelizeAdapter(sequelize);
@@ -102,4 +105,3 @@ const casbinEnforcer = new Casbin.Enforcer('model.conf', adapter);
 // Carga las políticas desde la base de datos (si es necesario)
 await adapter.loadPolicies();
 */
-export default Usuario;

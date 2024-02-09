@@ -33,8 +33,9 @@
   app.use('/usuarios', usuariosRoutes);
   app.use('/amenities', amenitiesRoutes);
 
+ /* Middleware autenticacion admin*/
+ // app.use('/admin', authenticateJWT, checkPermission, adminRoutes);
  
-  app.use('/admin', authenticateJWT, checkPermission, adminRoutes);
  // app.use(authenticateJWT, checkPermission);
  // app.use('/admin', adminRoutes);
 

@@ -1,4 +1,4 @@
-import SequelizeAdapter from 'sequelize-adapter';
+import { SequelizeAdapter } from 'casbin-sequelize-adapter';
 import { obtenerRolUsuario } from './controllers/propietarios.controllers.js';
 import sequelize from './config/db.js'
 

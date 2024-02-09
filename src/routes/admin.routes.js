@@ -1,3 +1,4 @@
+/*
 import express from 'express';
 const router = express.Router();
 
@@ -12,3 +13,4 @@ router.get('/adminPanel', async (req, res) => {
 });
 
 export default router;
+*/

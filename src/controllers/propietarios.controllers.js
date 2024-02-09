@@ -144,6 +144,18 @@ export const cambiarRolDeUsuario = async (idUsuario, nuevoRol) => {
   }
 };
 
+
+export const obtenerRolUsuario = async (usuario) => {
+  try {
+    const usuarioConRol = await Usuario.findByPk(usuario.id);
+    return usuarioConRol.rol_id;
+  } catch (error) {
+    console.error('Error al obtener el rol del usuario:', error);
+    throw error;
+  }
+};
+
+/*
 export const obtenerRolUsuario = async (usuario) => {
   const usuarioConRol = await Usuario.findByPk(usuario.id, {
     attributes: ['rol_id'],
@@ -157,7 +169,7 @@ export const obtenerRolUsuario = async (usuario) => {
 
   return usuarioConRol.rol.nombre; // Retornar el nombre del rol
 };
-
+*/
 
 /*
 // Controlador para iniciar sesión
